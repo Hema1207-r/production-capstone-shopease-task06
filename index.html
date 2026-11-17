@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="ShopEase demo storefront capstone project with product management and cart.">
+  <meta name="theme-color" content="#f7f7fb">
+  <title>ShopEase — Everyday finds, made easy</title>
+  <link rel="stylesheet" href="style.css">
+  <script type="module" src="app.js"></script>
+</head>
+<body>
+  <header class="site-header">
+    <a class="brand" href="#home" aria-label="ShopEase home"><span class="brand-icon">S</span> ShopEase<span class="brand-dot">.</span></a>
+    <nav class="main-nav" aria-label="Main navigation">
+      <a href="#home" class="nav-link active">Home</a>
+      <a href="#products" class="nav-link">Shop</a>
+      <a href="#about" class="nav-link">About</a>
+    </nav>
+    <div class="header-actions">
+      <button class="header-button account-button" id="accountButton" type="button">Sign in</button>
+      <button class="cart-button" id="cartButton" type="button" aria-label="Open shopping cart">Bag <span id="cartCount">0</span></button>
+    </div>
+  </header>
+
+  <main id="home">
+    <section class="hero">
+      <div class="hero-content">
+        <span class="eyebrow">THE EVERYDAY EDIT</span>
+        <h1>Little things.<br><span>Better days.</span></h1>
+        <p>Thoughtful finds for your everyday life. Explore our demo collection and discover something you love.</p>
+        <a class="button button-light" href="#products">Explore collection <span aria-hidden="true">→</span></a>
+      </div>
+      <div class="hero-decoration" aria-hidden="true">
+        <div class="hero-orbit orbit-one"></div><div class="hero-orbit orbit-two"></div>
+        <div class="hero-product"><span>✦</span><small>THE GOOD<br>STUFF</small></div>
+        <div class="hero-spark spark-one">✳</div><div class="hero-spark spark-two">✧</div>
+      </div>
+    </section>
+
+    <section class="benefits" aria-label="Store benefits">
+      <div><span>♡</span><p><strong>Curated picks</strong><small>Thoughtful everyday items</small></p></div>
+      <div><span>↗</span><p><strong>Easy shopping</strong><small>A simple demo checkout</small></p></div>
+      <div><span>✦</span><p><strong>Made for everyone</strong><small>Responsive on every screen</small></p></div>
+    </section>
+
+    <section class="shop-section" id="products">
+      <div class="section-heading">
+        <div><span class="eyebrow dark-eyebrow">FIND YOUR FAVORITE</span><h2>Explore the collection</h2><p>Browse, search and manage the demo products.</p></div>
+        <button class="button button-outline admin-button" id="manageButton" type="button">＋ Manage products</button>
+      </div>
+      <div class="shop-controls">
+        <label class="search-field"><span aria-hidden="true">⌕</span><input id="searchInput" type="search" placeholder="Search products..." aria-label="Search products"></label>
+        <label class="select-field"><span class="sr-only">Filter category</span><select id="categoryFilter"><option value="all">All categories</option></select></label>
+        <label class="select-field"><span class="sr-only">Sort products</span><select id="sortSelect"><option value="featured">Featured</option><option value="price-low">Price: low to high</option><option value="price-high">Price: high to low</option><option value="name">Name: A to Z</option></select></label>
+      </div>
+      <div class="catalogue-meta"><span id="productCount" aria-live="polite">Loading products…</span><span class="demo-label">DEMO STORE</span></div>
+      <div id="productGrid" class="product-grid" aria-label="Product catalogue">
+        <div class="skeleton"></div><div class="skeleton"></div><div class="skeleton"></div><div class="skeleton"></div>
+      </div>
+    </section>
+
+    <section class="about-section" id="about">
+      <div><span class="eyebrow dark-eyebrow">ABOUT THIS PROJECT</span><h2>A storefront built<br>for learning.</h2></div>
+      <p>ShopEase is an educational capstone demonstrating a storefront interface, simulated account flow, product CRUD operations, cart management and browser-based persistence. It does not process real payments or store real passwords.</p>
+    </section>
+  </main>
+
+  <footer class="site-footer"><a class="brand footer-brand" href="#home"><span class="brand-icon">S</span> ShopEase<span class="brand-dot">.</span></a><span>Educational capstone demo · 2026</span><a href="#home">Back to top ↑</a></footer>
+
+  <!-- Account dialog: demonstration only, no real authentication backend. -->
+  <dialog class="modal" id="accountModal" aria-labelledby="accountTitle">
+    <form method="dialog" class="modal-card" id="accountForm">
+      <button class="modal-close" type="button" data-close aria-label="Close">×</button>
+      <span class="eyebrow dark-eyebrow">WELCOME TO SHOPEASE</span>
+      <h2 id="accountTitle">Your account</h2>
+      <p class="modal-note">Demo sign-in only. Use any name and email; do not enter a real password.</p>
+      <label class="form-label">Your name<input id="accountName" name="name" required maxlength="40" placeholder="e.g. Alex"></label>
+      <label class="form-label">Email address<input id="accountEmail" name="email" type="email" required placeholder="alex@example.com"></label>
+      <label class="form-label">Demo passcode<input id="accountPassword" name="password" type="password" required minlength="4" placeholder="At least 4 characters"></label>
+      <button class="button button-primary full-button" type="submit">Continue</button>
+      <small class="fine-print">This sample stores a display name and email in this browser only. It is not secure authentication.</small>
+    </form>
+  </dialog>
+
+  <dialog class="modal" id="cartModal" aria-labelledby="cartTitle">
+    <div class="modal-card">
+      <button class="modal-close" type="button" data-close aria-label="Close">×</button>
+      <span class="eyebrow dark-eyebrow">YOUR PICKS</span><h2 id="cartTitle">Shopping bag</h2>
+      <div id="cartItems" class="cart-items"></div>
+      <div class="cart-total"><span>Total</span><strong id="cartTotal">₹0</strong></div>
+      <button class="button button-primary full-button" id="checkoutButton" type="button">Place demo order</button>
+      <small class="fine-print">Demo only — no payment will be collected.</small>
+    </div>
+  </dialog>
+
+  <dialog class="modal" id="productModal" aria-labelledby="productModalTitle">
+    <form method="dialog" class="modal-card" id="productForm">
+      <button class="modal-close" type="button" data-close aria-label="Close">×</button>
+      <span class="eyebrow dark-eyebrow">STORE MANAGEMENT</span><h2 id="productModalTitle">Add a product</h2>
+      <input id="productId" type="hidden">
+      <label class="form-label">Product name<input id="productName" required maxlength="70" placeholder="Product name"></label>
+      <label class="form-label">Category<select id="productCategory"><option>Accessories</option><option>Home</option><option>Tech</option><option>Stationery</option></select></label>
+      <label class="form-label">Price (₹)<input id="productPrice" type="number" required min="1" max="1000000" step="1" placeholder="499"></label>
+      <label class="form-label">Image URL (optional)<input id="productImage" type="url" placeholder="https://example.com/image.jpg"></label>
+      <label class="form-label">Short description<textarea id="productDescription" rows="3" maxlength="180" placeholder="Describe this item"></textarea></label>
+      <button class="button button-primary full-button" type="submit">Save product</button>
+    </form>
+  </dialog>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+</body>
+</html>
